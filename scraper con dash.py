@@ -5,7 +5,6 @@ from dash.dependencies import Input, Output
 
 import dash_core_components as dcc
 import dash_html_components as html
-import dash_bootstrap_components as dbc
 from bs4 import BeautifulSoup
 from urllib.request import urlopen,Request
 import pandas as pd
@@ -79,7 +78,7 @@ def scraping(btn1,btn2,value):
         req=Request(value, headers={'User-Agent': 'Mozilla/5.0'})
         with urlopen(req) as fp:
             soup=BeautifulSoup(fp,"html.parser")    
-        #time.sleep(10)
+        time.sleep(10)
         team=pd.DataFrame(columns=["Numero di Maglia","Ruolo","Nome","Nasc./Età","Nazionalità",
                                        "Presenze","Gol","Assist","Cartellini Gialli",
                                        "Doppi Gialli","Cartellini Rossi","Minuti Giocati"])
@@ -112,7 +111,7 @@ def scraping(btn1,btn2,value):
                                                "Minuti Giocati":lista[11]}])
                    print(lista)
                    team=pd.concat([team,lista])
-               #time.sleep(10)
+               time.sleep(10)
                player=player.next_sibling.next_sibling
                if "btn-nclicks-2"== ctx.triggered_id: break
         team=team.set_index(["Numero di Maglia"])
